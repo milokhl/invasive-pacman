@@ -143,6 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pelletPrefab: {fileID: 5046250026439165511, guid: ae51fc107ca7ee14bb58e3105af431c7,
     type: 3}
+  wallPrefab: {fileID: 3743809304915687344, guid: 56df3a3c17bee8240b846095303ab819,
+    type: 3}
   cellSize: 1
 --- !u!4 &630203182
 Transform:
