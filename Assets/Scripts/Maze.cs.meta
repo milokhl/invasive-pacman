@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - pelletPrefab: {fileID: 5046250026439165511, guid: ae51fc107ca7ee14bb58e3105af431c7,
+  - foodPrefab: {fileID: 3777497757012535780, guid: 016f61f36c1f42e43b6d48ac692656ce,
       type: 3}
   - wallPrefab: {fileID: 3743809304915687344, guid: 56df3a3c17bee8240b846095303ab819,
       type: 3}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Maze : MonoBehaviour
 {
-    public GameObject pelletPrefab = null;
+    public GameObject foodPrefab = null;
     public GameObject wallPrefab = null;
 
     public float cellSize = 1;
@@ -29,7 +29,7 @@ public class Maze : MonoBehaviour
             {
                 if (cells[x, y].growsFood)
                 {
-                    GameObject pellet = Instantiate(pelletPrefab);
+                    GameObject pellet = Instantiate(foodPrefab);
                     pellet.transform.position = new Vector3(x * cellSize, y * cellSize, 0);
                 }
                 if (cells[x, y].leftWall)
