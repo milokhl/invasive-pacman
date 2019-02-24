@@ -93,7 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94594877259e8544b98cc8d369065168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxFoodLevel: 2
   foodLevel: 2
+  regrowTime: 10
 --- !u!61 &5191385804780883611
 BoxCollider2D:
   m_ObjectHideFlags: 0
