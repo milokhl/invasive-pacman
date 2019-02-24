@@ -250,9 +250,9 @@ GameObject:
   - component: {fileID: 717467149}
   - component: {fileID: 717467148}
   - component: {fileID: 717467147}
-  - component: {fileID: 717467151}
   - component: {fileID: 717467150}
   - component: {fileID: 717467152}
+  - component: {fileID: 717467151}
   m_Layer: 0
   m_Name: PacManPlayer
   m_TagString: Untagged
@@ -315,7 +315,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300016, guid: 80fd365f0d0a15d40876678abc30b92e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -377,7 +377,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.49
+  m_Radius: 0.4
 --- !u!114 &717467152
 MonoBehaviour:
   m_ObjectHideFlags: 0
