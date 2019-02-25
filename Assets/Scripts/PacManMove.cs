@@ -10,10 +10,19 @@ public class PacManMove : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         dest = transform.position;
+        this.tag = "Player";
     }
 
     // Update is called once per frame
     void Update() {  
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.name == "Ghost(Clone)")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void FixedUpdate() {
