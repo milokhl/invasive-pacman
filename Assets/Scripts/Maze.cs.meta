@@ -8,6 +8,8 @@ MonoImporter:
       type: 3}
   - wallPrefab: {fileID: 3743809304915687344, guid: 56df3a3c17bee8240b846095303ab819,
       type: 3}
+  - ghostPrefab: {fileID: 2678888556090134031, guid: bc34ee44dfb1c23408a34bfdb9c34054,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
