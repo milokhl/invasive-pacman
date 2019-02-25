@@ -47,7 +47,7 @@ public class FoodController : MonoBehaviour {
     // Returns true if a ghost can eat this food patch.
     public bool IsEdible()
     {
-        return (foodLevel == maxFoodLevel);
+        return (foodLevel > 0);
     }
 
     // Called whenever something enters the BoxCollider2D of the Food prefab.

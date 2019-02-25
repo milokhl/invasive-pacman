@@ -19,8 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name == "Ghost(Clone)")
-        {
+        if (other.name == "Ghost(Clone)") {
             Destroy(this.gameObject);
         }
     }

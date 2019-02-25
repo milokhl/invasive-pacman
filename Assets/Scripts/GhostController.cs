@@ -15,11 +15,17 @@ public class GhostController : MonoBehaviour
     Vector2 dest = Vector2.zero;
     Vector2 direction = new Vector2(1, 0);
 
+    // Store a dead ghost sprite to switch to upon death.
+    Sprite spriteDead = null;
+
     // Start is called before the first frame update
     void Start()
     {
         dest = (Vector2)transform.position;
         direction = RandomDirection();
+        spriteDead = Resources.Load<Sprite>("ghost_dead");
+
+        GetComponent<Animator>().SetBool("isDead", false);
     }
 
     // Called whenever the ghost hits a collider.
@@ -36,7 +42,9 @@ public class GhostController : MonoBehaviour
 
             // Ghost starves.
             if (tilesWithoutFood >= maxTilesWithoutFood) {
-                Destroy(this.gameObject);
+                // GetComponent<SpriteRenderer>().sprite = spriteDead;
+                // Destroy(this.gameObject);
+                GetComponent<Animator>().SetBool("isDead", true);
             }
         }
     }

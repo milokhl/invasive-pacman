@@ -16,6 +16,9 @@ TextureImporter:
     21300022: ghost_default
     21300024: pacman_up_3
     21300026: pacman_down_3
+    21300028: ghost_dead_blue
+    21300030: ghost_dead_white
+    21300032: ghost_mouth
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -373,6 +376,66 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: dd1d30324d3812c43bbb84bec3176903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_dead_blue
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 48
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e9ea04d49d8f494e931941d84e11cfe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_dead_white
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 48
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d05e5eb8effa4104f9289484a322b561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_mouth
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 0
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb06a38bacf1a484187a0d751377e57a
       vertices: []
       indices: 
       edges: []
