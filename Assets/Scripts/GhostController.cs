@@ -13,7 +13,6 @@ public class GhostController : MonoBehaviour
 
     // Private members.
     Vector2 dest = Vector2.zero;
-    Vector2 waypoint = Vector2.zero;
     Vector2 direction = new Vector2(1, 0);
 
     float deathTimer = 0.0f;
@@ -22,13 +21,16 @@ public class GhostController : MonoBehaviour
     void Start()
     {
         dest = (Vector2)transform.position;
-
-        waypoint = (Vector2)transform.position;
-
         direction = RandomDirection();
 
         // Initalize to false to make sure ghosts are alive at start.
         GetComponent<Animator>().SetBool("isDead", false);
+        UpdateAnimation();
+    }
+
+    void UpdateAnimation() {
+        GetComponent<Animator>().SetFloat("DirX", direction.x);
+        GetComponent<Animator>().SetFloat("DirY", direction.y);
     }
 
     // Called whenever the ghost hits a collider.
@@ -97,9 +99,9 @@ public class GhostController : MonoBehaviour
         if ((Vector2)transform.position == dest) {
 
             Vector2 playerDirection = GetPlayerDirection();
-            if (playerDirection != new Vector2(0, 0))
-            {
+            if (playerDirection != new Vector2(0, 0)) {
                 direction = playerDirection;
+                UpdateAnimation();
             }
 
             // If the direction of motion is free, keeping going that way.
@@ -107,7 +109,8 @@ public class GhostController : MonoBehaviour
                 dest += direction;
             } else {
                 // Otherwise, try to find a free direction to move in.
-                direction = RandomDirection();   
+                direction = RandomDirection();
+                UpdateAnimation();  
             }
         }
     }
