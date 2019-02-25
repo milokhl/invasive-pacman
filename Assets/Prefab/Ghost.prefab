@@ -112,7 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.12
-  maxTilesWithoutFood: 10
+  maxTimeWithoutFood: 3
+  timeWithoutFood: 0
 --- !u!50 &3084122641739685656
 Rigidbody2D:
   serializedVersion: 4
