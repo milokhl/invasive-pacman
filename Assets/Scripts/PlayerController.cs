@@ -23,17 +23,19 @@ public class PlayerController : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.name == "Ghost(Clone)") {
-            GetComponent<Animator>().SetBool("isDead", true);
-            speed = 0.0f;
+            bool ghost_is_dead = other.gameObject.GetComponent<Animator>().GetBool("isDead");
+
+            // Dead ghosts can't kill player.
+            if (!ghost_is_dead) {
+                GetComponent<Animator>().SetBool("isDead", true);
+                speed = 0.0f;
+            }
         }
     }
 
     void FixedUpdate() {
         if (speed <= 0.0f) {
             deathTimer += Time.deltaTime;
-
-            // GetComponent<Animator>().SetFloat("DirX", 0);
-            // GetComponent<Animator>().SetFloat("DirY", 0);
 
             if (deathTimer >= 0.75f) {
                 Destroy(this.gameObject);

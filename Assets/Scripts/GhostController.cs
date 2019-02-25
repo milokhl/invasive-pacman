@@ -28,7 +28,8 @@ public class GhostController : MonoBehaviour
         UpdateAnimation();
     }
 
-    void UpdateAnimation() {
+    void UpdateAnimation()
+    {
         GetComponent<Animator>().SetFloat("DirX", direction.x);
         GetComponent<Animator>().SetFloat("DirY", direction.y);
     }
