@@ -13,6 +13,7 @@ public class GhostController : MonoBehaviour
 
     // Private members.
     Vector2 dest = Vector2.zero;
+    Vector2 waypoint = Vector2.zero;
     Vector2 direction = new Vector2(1, 0);
 
     float deathTimer = 0.0f;
@@ -21,6 +22,9 @@ public class GhostController : MonoBehaviour
     void Start()
     {
         dest = (Vector2)transform.position;
+
+        waypoint = (Vector2)transform.position;
+
         direction = RandomDirection();
 
         // Initalize to false to make sure ghosts are alive at start.
@@ -41,7 +45,6 @@ public class GhostController : MonoBehaviour
 
             // Ghost starves.
             if (tilesWithoutFood >= maxTilesWithoutFood) {
-                // Destroy(this.gameObject);
                 GetComponent<Animator>().SetBool("isDead", true);
                 speed = 0.0f; // Stop the ghost.
             }
@@ -70,8 +73,6 @@ public class GhostController : MonoBehaviour
             return valid_directions[choice];
         }
 
-        Debug.Log("no valid directions");
-
         return new Vector2(1, 0); // No valid directions found.
     }
 
@@ -93,9 +94,7 @@ public class GhostController : MonoBehaviour
         // Move the RigidBody2D rather than setting tranform.position directly.
         GetComponent<Rigidbody2D>().MovePosition(updated_pos);
 
-        // if (((Vector2)transform.position - dest).SqrMagnitude() < 0.05) {
         if ((Vector2)transform.position == dest) {
-            // GetComponent<Rigidbody2D>().MovePosition(dest);
 
             Vector2 playerDirection = GetPlayerDirection();
             if (playerDirection != new Vector2(0, 0))
@@ -117,15 +116,16 @@ public class GhostController : MonoBehaviour
     {
         Vector2 pos = transform.position;
 
-        RaycastHit2D hit_to = Physics2D.Linecast(pos + dir, pos);
-        RaycastHit2D hit_from = Physics2D.Linecast(pos, pos + dir);
+        RaycastHit2D[] hits;
+        hits = Physics2D.RaycastAll(pos, dir, 1.0f);
 
-        if (hit_to.collider != null && hit_to.collider.name == "Wall(Clone)") {
-            return false;
+        for (int i = 0; i < hits.Length; i++) {
+            RaycastHit2D hit = hits[i];
+            if (hit.collider.name == "Wall(Clone)") {
+                return false;
+            }
         }
-        if (hit_from.collider != null && hit_from.collider.name == "Wall(Clone)") {
-            return false;
-        }
+
         return true;
     }
 
