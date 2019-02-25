@@ -5,19 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     // Expose the speed parameter to Unity.
     public float speed = 0.2f;
-    Vector2 dest = Vector2.zero;
+    private Vector2 dest = Vector2.zero;
 
-    float deathTimer = 0.0f;
+    private float deathTimer = 0.0f;
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         dest = transform.position;
         this.tag = "Player";
         GetComponent<Animator>().SetBool("isDead", false);
-    }
-
-    // Update is called once per frame
-    void Update() {  
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -33,7 +30,8 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         if (speed <= 0.0f) {
             deathTimer += Time.deltaTime;
 
@@ -72,15 +70,10 @@ public class PlayerController : MonoBehaviour {
         GetComponent<Animator>().SetFloat("DirY", dir.y);
     }
 
-    bool CollisionFree(Vector2 direction) {
+    bool CollisionFree(Vector2 dir)
+    {
         Vector2 pos = transform.position;
-
-        // RaycastHit2D hit_to = Physics2D.Linecast(pos + direction, pos);
-        // RaycastHit2D hit_from = Physics2D.Linecast(pos, pos + direction);
-
-        RaycastHit2D hit = Physics2D.Linecast(pos + direction, pos);
-
-        // return hit_to.collider.name != "Wall(Clone)" && hit_from.collider.name != "Wall(Clone)";
+        RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
         return (hit.collider == GetComponent<Collider2D>());
     }
 }

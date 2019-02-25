@@ -10,7 +10,7 @@ public class FoodController : MonoBehaviour {
 
     // Whenever the timer hits this value, food grows back.
     public float regrowTime = 10;
-
+    
     private Sprite spriteAlive = null;
     private Sprite spriteDead = null;
 
