@@ -14,7 +14,13 @@ public class GhostController : MonoBehaviour
         dest = transform.position;
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+    }
+
     void FixedUpdate() {
+        Debug.Log((Vector2)transform.position + ", " + dest + ", ");
         // Move closer to the current destination.
         Vector2 updated_pos = Vector2.MoveTowards(transform.position, dest, speed);
 
@@ -22,18 +28,18 @@ public class GhostController : MonoBehaviour
         GetComponent<Rigidbody2D>().MovePosition(updated_pos);
 
         // Check for keyboard input if not moving (at destination).
-        if ((Vector2)transform.position == dest) {
-            if (Input.GetKey(KeyCode.UpArrow) && CollisionFree(Vector2.up)) {
-                dest = (Vector2)transform.position + Vector2.up;
-            }
-            if (Input.GetKey(KeyCode.RightArrow) && CollisionFree(Vector2.right)) {
-                dest = (Vector2)transform.position + Vector2.right;
-            }
-            if (Input.GetKey(KeyCode.DownArrow) && CollisionFree(-Vector2.up)) {
-                dest = (Vector2)transform.position - Vector2.up;
-            }
-            if (Input.GetKey(KeyCode.LeftArrow) && CollisionFree(-Vector2.right)) {
-                dest = (Vector2)transform.position - Vector2.right;
+        if (((Vector2)transform.position - dest).SqrMagnitude() < 0.05)
+        {
+            GetComponent<Rigidbody2D>().MovePosition(dest);
+
+            float randDirection = Random.Range(0, 2);
+            randDirection = 2 * (randDirection - 0.5f);
+            if (Random.Range(0, 2) == 0 && CollisionFree(-new Vector2(randDirection, 0)))
+            {
+                dest = (Vector2)transform.position - new Vector2(randDirection, 0);
+            } else if (CollisionFree(-new Vector2(0, randDirection)))
+            {
+                dest = (Vector2)transform.position - new Vector2(0, randDirection);
             }
         }
     }
