@@ -224,6 +224,8 @@ MonoBehaviour:
     type: 3}
   wallPrefab: {fileID: 3743809304915687344, guid: 56df3a3c17bee8240b846095303ab819,
     type: 3}
+  ghostPrefab: {fileID: 2678888556090134031, guid: bc34ee44dfb1c23408a34bfdb9c34054,
+    type: 3}
   cellSize: 1
 --- !u!4 &630203182
 Transform:
@@ -390,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde648781f573714fae9c7d569ee3779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.4
+  speed: 0.2
 --- !u!1 &1382891752
 GameObject:
   m_ObjectHideFlags: 0
