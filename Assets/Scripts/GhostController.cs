@@ -15,6 +15,7 @@ public class GhostController : MonoBehaviour
         direction = RandomDirection();
     }
 
+    // Returns a random collision-free direction to move in.
     Vector2 RandomDirection() {
         List<Vector2> valid_directions = new List<Vector2>();
         if (CollisionFree(new Vector2(0, 1))) {
@@ -60,9 +61,9 @@ public class GhostController : MonoBehaviour
         }
     }
 
-    bool CollisionFree(Vector2 direction) {
+    bool CollisionFree(Vector2 dir) {
         Vector2 pos = transform.position;
-        RaycastHit2D hit = Physics2D.Linecast(pos + direction, pos);
+        RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
         return (hit.collider == GetComponent<Collider2D>());
     }
 }
