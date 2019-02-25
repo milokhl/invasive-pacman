@@ -253,8 +253,8 @@ GameObject:
   - component: {fileID: 717467148}
   - component: {fileID: 717467147}
   - component: {fileID: 717467150}
-  - component: {fileID: 717467151}
   - component: {fileID: 717467152}
+  - component: {fileID: 717467151}
   m_Layer: 0
   m_Name: PacManPlayer
   m_TagString: Untagged
@@ -362,7 +362,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &717467151
 CircleCollider2D:

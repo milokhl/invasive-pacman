@@ -67,6 +67,7 @@ public class GhostController : MonoBehaviour
 
         if (valid_directions.Count > 0) {
             int choice = Random.Range(0, valid_directions.Count);
+            Debug.Log(valid_directions.Count+ ", " +  choice);
             return valid_directions[choice];
         }
 

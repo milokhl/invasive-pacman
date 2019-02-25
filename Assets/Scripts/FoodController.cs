@@ -47,14 +47,13 @@ public class FoodController : MonoBehaviour {
     // Returns true if a ghost can eat this food patch.
     public bool IsEdible()
     {
-        return (foodLevel == maxFoodLevel);
+        return (foodLevel != 0);
     }
 
     // Called whenever something enters the BoxCollider2D of the Food prefab.
     void OnTriggerEnter2D(Collider2D co) {
         // If PacManPlayer enters the food, decrement its level.
-        // Note: this will break if the object changes name!!!
-        if (co.name == "PacManPlayer") {
+        if (co.tag == "Player") {
             DecrementFoodLevel();
         }
     }
