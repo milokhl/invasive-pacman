@@ -15,6 +15,8 @@ public class GhostController : MonoBehaviour
     Vector2 dest = Vector2.zero;
     Vector2 direction = new Vector2(1, 0);
 
+    float deathTimer = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,6 @@ public class GhostController : MonoBehaviour
                 // Destroy(this.gameObject);
                 GetComponent<Animator>().SetBool("isDead", true);
                 speed = 0.0f; // Stop the ghost.
-                // dest = (Vector2)transform.position;
             }
         }
     }
@@ -74,7 +75,15 @@ public class GhostController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (speed <= 0) { return; }
+        if (speed <= 0) {
+            deathTimer += Time.deltaTime;
+
+            if (deathTimer >= 3.0f) {
+                Destroy(this.gameObject);
+            }
+            
+            return;
+        }
 
         // Move closer to the current destination.
         Vector2 updated_pos = Vector2.MoveTowards(transform.position, dest, speed);
