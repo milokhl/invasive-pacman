@@ -7,10 +7,13 @@ public class PlayerController : MonoBehaviour {
     public float speed = 0.2f;
     Vector2 dest = Vector2.zero;
 
+    float deathTimer = 0.0f;
+
     // Start is called before the first frame update
     void Start() {
         dest = transform.position;
         this.tag = "Player";
+        GetComponent<Animator>().SetBool("isDead", false);
     }
 
     // Update is called once per frame
@@ -20,11 +23,25 @@ public class PlayerController : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.name == "Ghost(Clone)") {
-            Destroy(this.gameObject);
+            GetComponent<Animator>().SetBool("isDead", true);
+            speed = 0.0f;
         }
     }
 
     void FixedUpdate() {
+        if (speed <= 0.0f) {
+            deathTimer += Time.deltaTime;
+
+            // GetComponent<Animator>().SetFloat("DirX", 0);
+            // GetComponent<Animator>().SetFloat("DirY", 0);
+
+            if (deathTimer >= 0.75f) {
+                Destroy(this.gameObject);
+            }
+            
+            return;
+        }
+
         // Move closer to the current destination.
         Vector2 updated_pos = Vector2.MoveTowards(transform.position, dest, speed);
 
@@ -48,7 +65,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Animation Parameters
-        Vector2 dir = dest - (Vector2)transform.position;
+        Vector2 dir = (dest - (Vector2)transform.position);
         GetComponent<Animator>().SetFloat("DirX", dir.x);
         GetComponent<Animator>().SetFloat("DirY", dir.y);
     }
