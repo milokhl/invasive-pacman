@@ -6,17 +6,44 @@ public class GhostController : MonoBehaviour
 {
     // Expose the speed parameter to Unity.
     public float speed = 0.1f;
+    
+    // If the ghost doesn't eat for this many tiles, it will die.
+    public int maxTilesWithoutFood = 10;
+    int tilesWithoutFood = 0;
+
+    // Private members.
     Vector2 dest = Vector2.zero;
     Vector2 direction = new Vector2(1, 0);
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         dest = (Vector2)transform.position;
         direction = RandomDirection();
     }
 
+    // Called whenever the ghost hits a collider.
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // TODO: this seems unsafe
+        if (other.gameObject.name == "Food(Clone)") {
+            bool is_edible = other.gameObject.GetComponent<FoodController>().IsEdible();
+            if (is_edible) {
+                tilesWithoutFood = 0;
+            } else {
+                tilesWithoutFood += 1;
+            }
+
+            // Ghost starves.
+            if (tilesWithoutFood >= maxTilesWithoutFood) {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
     // Returns a random collision-free direction to move in.
-    Vector2 RandomDirection() {
+    Vector2 RandomDirection()
+    {
         List<Vector2> valid_directions = new List<Vector2>();
         if (CollisionFree(new Vector2(0, 1))) {
             valid_directions.Add(new Vector2(0, 1));
@@ -39,7 +66,8 @@ public class GhostController : MonoBehaviour
         return new Vector2(1, 0); // No valid directions found.
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         // Move closer to the current destination.
         Vector2 updated_pos = Vector2.MoveTowards(transform.position, dest, speed);
 
@@ -48,7 +76,6 @@ public class GhostController : MonoBehaviour
 
         // Check for keyboard input if not moving (at destination).
         if (((Vector2)transform.position - dest).SqrMagnitude() < 0.05) {
-        // if ((Vector2)transform.position == dest) {
             GetComponent<Rigidbody2D>().MovePosition(dest);
 
             // If the direction of motion is free, keeping going that way.
@@ -61,7 +88,8 @@ public class GhostController : MonoBehaviour
         }
     }
 
-    bool CollisionFree(Vector2 dir) {
+    bool CollisionFree(Vector2 dir)
+    {
         Vector2 pos = transform.position;
         RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
         return (hit.collider == GetComponent<Collider2D>());
