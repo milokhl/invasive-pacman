@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PacManMove : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
     // Expose the speed parameter to Unity.
     public float speed = 0.4f;
     Vector2 dest = Vector2.zero;

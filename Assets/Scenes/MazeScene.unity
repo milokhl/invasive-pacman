@@ -253,8 +253,8 @@ GameObject:
   - component: {fileID: 717467148}
   - component: {fileID: 717467147}
   - component: {fileID: 717467150}
-  - component: {fileID: 717467152}
   - component: {fileID: 717467151}
+  - component: {fileID: 717467152}
   m_Layer: 0
   m_Name: PacManPlayer
   m_TagString: Untagged
