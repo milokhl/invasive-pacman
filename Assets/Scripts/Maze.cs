@@ -61,6 +61,7 @@ public class Maze : MonoBehaviour
 
         }
 
+        // Instantiate all of the ghosts.
         foreach (Vector2 gl in ghostLocations) {
             GameObject ghost = Instantiate(ghostPrefab);
             ghost.transform.position = new Vector3(gl.x * cellSize, gl.y * cellSize, 0);
