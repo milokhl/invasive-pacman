@@ -19,6 +19,9 @@ public class FoodController : MonoBehaviour {
     Sprite spriteDying = null;
     Sprite spriteDead = null;
 
+    // Load all the sprites once, to speed things up during gameplay.
+    // Anything placed in a folder called "Resources" is accessible through
+    // the Resources.Load API call.
     void Start() {
         spriteAlive = Resources.Load<Sprite>("Food");
         spriteDying = Resources.Load<Sprite>("DyingFood");
@@ -29,12 +32,9 @@ public class FoodController : MonoBehaviour {
         // Increment the elapsed time.
         timer += Time.deltaTime;
 
+        // If this food hasn't been touched in 'regrowTime' seconds, increment.
         if (timer > regrowTime) {
-            timer = 0;
-
-            // Regrow the food.
-            foodLevel += 1;
-            foodLevel = System.Math.Min(foodLevel, maxFoodLevel);
+            IncrementFoodLevel();
         }
     }
 
@@ -47,10 +47,22 @@ public class FoodController : MonoBehaviour {
     // Called whenever something enters the BoxCollider2D of the Food prefab.
     void OnTriggerEnter2D(Collider2D co) {
         // If PacManPlayer enters the food, decrement its level.
+        // Note: this will break if the object changes name!!!
         if (co.name == "PacManPlayer") {
-            foodLevel -= 1;
-            foodLevel = System.Math.Max(foodLevel, 0);
+            DecrementFoodLevel();
         }
+    }
+
+    void IncrementFoodLevel() {
+        timer = 0; // Reset timer.
+        foodLevel += 1;
+        foodLevel = System.Math.Min(foodLevel, maxFoodLevel);
+    }
+
+    void DecrementFoodLevel() {
+        timer = 0; // Reset timer.
+        foodLevel -= 1;
+        foodLevel = System.Math.Max(foodLevel, 0);
     }
 
     // Update the appearance of the food sprite based on its level.

@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodLevel: 2
   foodLevel: 2
-  regrowTime: 10
+  regrowTime: 7
 --- !u!61 &5191385804780883611
 BoxCollider2D:
   m_ObjectHideFlags: 0
