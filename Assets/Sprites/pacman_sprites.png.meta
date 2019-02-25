@@ -13,7 +13,7 @@ TextureImporter:
     21300016: pacman_down_1
     21300018: pacman_down_2
     21300020: pacman_left_3
-    21300022: pacman_sprites_1
+    21300022: ghost_default
     21300024: pacman_up_3
     21300026: pacman_down_3
   externalObjects: {}
@@ -353,6 +353,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 136fbfbbd236ea94fbe214bb8412ff97
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_default
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 48
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd1d30324d3812c43bbb84bec3176903
       vertices: []
       indices: 
       edges: []
