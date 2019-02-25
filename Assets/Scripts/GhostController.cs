@@ -67,7 +67,6 @@ public class GhostController : MonoBehaviour
 
         if (valid_directions.Count > 0) {
             int choice = Random.Range(0, valid_directions.Count);
-            Debug.Log(valid_directions.Count+ ", " +  choice);
             return valid_directions[choice];
         }
 
@@ -96,6 +95,12 @@ public class GhostController : MonoBehaviour
         if (((Vector2)transform.position - dest).SqrMagnitude() < 0.05) {
             GetComponent<Rigidbody2D>().MovePosition(dest);
 
+            Vector2 playerDirection = GetPlayerDirection();
+            if (playerDirection != new Vector2(0, 0))
+            {
+                direction = playerDirection;
+            }
+
             // If the direction of motion is free, keeping going that way.
             if (CollisionFree(direction)) {
                 dest += direction;
@@ -111,5 +116,29 @@ public class GhostController : MonoBehaviour
         Vector2 pos = transform.position;
         RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
         return (hit.collider == GetComponent<Collider2D>());
+    }
+
+    Vector2 GetPlayerDirection()
+    {
+        Vector2 pos = transform.position;
+        
+        List<Vector2> directions = new List<Vector2>();
+        directions.Add(new Vector2(0, 1));
+        directions.Add(new Vector2(0, -1));
+        directions.Add(new Vector2(1, 0));
+        directions.Add(new Vector2(-1, 0));
+        
+        for (int i = 0; i < directions.Count; i++)
+        {
+            // TODO: for now assume a constant maze size of 11x11
+            Debug.Log(2 * directions[i]);
+            RaycastHit2D hit = Physics2D.Raycast(pos + 2 * directions[i], pos);
+            Debug.Log(hit.collider);
+            if (hit.collider != null && hit.collider.tag == "Player")
+            {
+                return directions[i];
+            }
+        }
+        return new Vector2(0, 0);
     }
 }
