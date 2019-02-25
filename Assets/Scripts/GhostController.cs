@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class GhostController : MonoBehaviour
 {
-    // Expose the speed parameter to Unity.
+    // Expose these params to unity.
     public float speed = 0.1f;
-    
-    // If the ghost doesn't eat for this many tiles, it will die.
-    public int maxTilesWithoutFood = 10;
-    int tilesWithoutFood = 0;
+    public float maxTimeWithoutFood = 3.0f;
+    public float timeWithoutFood = 0.0f;
 
     // Private members.
-    Vector2 dest = Vector2.zero;
-    Vector2 direction = new Vector2(1, 0);
-
-    float deathTimer = 0.0f;
+    private Vector2 dest = Vector2.zero;
+    private Vector2 direction = new Vector2(1, 0);
+    private float deathTimer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -37,19 +34,12 @@ public class GhostController : MonoBehaviour
     // Called whenever the ghost hits a collider.
     void OnTriggerEnter2D(Collider2D other)
     {
-        // TODO: this seems unsafe
         if (other.gameObject.name == "Food(Clone)") {
+
+            // Reset the timeWithoutFood timer when food is hit.
             bool is_edible = other.gameObject.GetComponent<FoodController>().IsEdible();
             if (is_edible) {
-                tilesWithoutFood = 0;
-            } else {
-                tilesWithoutFood += 1;
-            }
-
-            // Ghost starves.
-            if (tilesWithoutFood >= maxTilesWithoutFood) {
-                GetComponent<Animator>().SetBool("isDead", true);
-                speed = 0.0f; // Stop the ghost.
+                timeWithoutFood = 0.0f;
             }
         }
     }
@@ -89,6 +79,13 @@ public class GhostController : MonoBehaviour
             }
             
             return;
+        }
+
+        timeWithoutFood += Time.deltaTime;
+
+        if (timeWithoutFood >= maxTimeWithoutFood) {
+            GetComponent<Animator>().SetBool("isDead", true);
+            speed = 0.0f; // Stop the ghost.
         }
 
         // Move closer to the current destination.
