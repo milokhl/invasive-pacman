@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     // Expose the speed parameter to Unity.
-    public float speed = 0.4f;
+    public float speed = 0.2f;
     Vector2 dest = Vector2.zero;
 
     // Start is called before the first frame update
