@@ -70,6 +70,8 @@ public class GhostController : MonoBehaviour
             return valid_directions[choice];
         }
 
+        Debug.Log("no valid directions");
+
         return new Vector2(1, 0); // No valid directions found.
     }
 
@@ -91,9 +93,9 @@ public class GhostController : MonoBehaviour
         // Move the RigidBody2D rather than setting tranform.position directly.
         GetComponent<Rigidbody2D>().MovePosition(updated_pos);
 
-        // Check for keyboard input if not moving (at destination).
-        if (((Vector2)transform.position - dest).SqrMagnitude() < 0.05) {
-            GetComponent<Rigidbody2D>().MovePosition(dest);
+        // if (((Vector2)transform.position - dest).SqrMagnitude() < 0.05) {
+        if ((Vector2)transform.position == dest) {
+            // GetComponent<Rigidbody2D>().MovePosition(dest);
 
             Vector2 playerDirection = GetPlayerDirection();
             if (playerDirection != new Vector2(0, 0))
@@ -114,8 +116,17 @@ public class GhostController : MonoBehaviour
     bool CollisionFree(Vector2 dir)
     {
         Vector2 pos = transform.position;
-        RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
-        return (hit.collider == GetComponent<Collider2D>());
+
+        RaycastHit2D hit_to = Physics2D.Linecast(pos + dir, pos);
+        RaycastHit2D hit_from = Physics2D.Linecast(pos, pos + dir);
+
+        if (hit_to.collider != null && hit_to.collider.name == "Wall(Clone)") {
+            return false;
+        }
+        if (hit_from.collider != null && hit_from.collider.name == "Wall(Clone)") {
+            return false;
+        }
+        return true;
     }
 
     Vector2 GetPlayerDirection()

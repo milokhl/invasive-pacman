@@ -72,7 +72,13 @@ public class PlayerController : MonoBehaviour {
 
     bool CollisionFree(Vector2 direction) {
         Vector2 pos = transform.position;
+
+        // RaycastHit2D hit_to = Physics2D.Linecast(pos + direction, pos);
+        // RaycastHit2D hit_from = Physics2D.Linecast(pos, pos + direction);
+
         RaycastHit2D hit = Physics2D.Linecast(pos + direction, pos);
+
+        // return hit_to.collider.name != "Wall(Clone)" && hit_from.collider.name != "Wall(Clone)";
         return (hit.collider == GetComponent<Collider2D>());
     }
 }
