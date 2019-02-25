@@ -10,7 +10,7 @@ public class Maze : MonoBehaviour
 
     List<Vector2> ghostLocations = new List<Vector2>
     {
-        new Vector2(2, 2),
+        new Vector2(1, 1),
         new Vector2(8, 8)
     };
 
