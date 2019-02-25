@@ -15,16 +15,13 @@ public class GhostController : MonoBehaviour
     Vector2 dest = Vector2.zero;
     Vector2 direction = new Vector2(1, 0);
 
-    // Store a dead ghost sprite to switch to upon death.
-    Sprite spriteDead = null;
-
     // Start is called before the first frame update
     void Start()
     {
         dest = (Vector2)transform.position;
         direction = RandomDirection();
-        spriteDead = Resources.Load<Sprite>("ghost_dead");
 
+        // Initalize to false to make sure ghosts are alive at start.
         GetComponent<Animator>().SetBool("isDead", false);
     }
 
@@ -42,9 +39,10 @@ public class GhostController : MonoBehaviour
 
             // Ghost starves.
             if (tilesWithoutFood >= maxTilesWithoutFood) {
-                // GetComponent<SpriteRenderer>().sprite = spriteDead;
                 // Destroy(this.gameObject);
                 GetComponent<Animator>().SetBool("isDead", true);
+                speed = 0.0f; // Stop the ghost.
+                // dest = (Vector2)transform.position;
             }
         }
     }
@@ -76,6 +74,8 @@ public class GhostController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (speed <= 0) { return; }
+
         // Move closer to the current destination.
         Vector2 updated_pos = Vector2.MoveTowards(transform.position, dest, speed);
 
