@@ -10,8 +10,9 @@ public class Maze : MonoBehaviour
 
     List<Vector2> ghostLocations = new List<Vector2>
     {
-        new Vector2(5, 1),
-        new Vector2(8, 8)
+        new Vector2(6, 1),
+        new Vector2(9, 8),
+        new Vector2(3, 8),
     };
 
     public float cellSize = 1;
